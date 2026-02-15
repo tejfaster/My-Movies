@@ -1,0 +1,18 @@
+# virtual environment
+venv/
+__pycache__/
+*.pyc
+
+# models
+models/
+*.pkl
+
+# data (optional if large)
+data/
+
+# system files
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
