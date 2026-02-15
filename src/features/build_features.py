@@ -27,12 +27,39 @@ test_user_movies = test.groupby("userId")["movieId"].apply(set).to_dict()
 
 samples = []
 
-users = list(user_id_map.keys())[:5000]
+# users = list(user_id_map.keys())[:5000]
+users = list(test_user_movies.keys())[:5000]
 
 for user_id in users:
 
+    if user_id not in user_id_map:
+        continue
+
     user_idx = user_id_map[user_id]
 
+    # Positive sample (movies actually watched in future)
+    positive_movies = test_user_movies[user_id]
+
+    for movie_id in positive_movies:
+        
+        if movie_id not in movie_id_map:
+            continue
+        
+        movie_idx = movie_id_map[movie_id]
+
+        user_vec = user_embeddings[user_idx]
+        movie_vec = movie_embeddings[movie_idx]
+
+        als_score = np.dot(user_vec,movie_vec)
+
+        samples.append([
+            user_idx,
+            movie_idx,
+            als_score,
+            1
+        ])
+
+    # Negative sample (AlS recommendation not watched)
     movie_indices,scores = model.recommend(
         user_idx,
         sparse_matrix[user_idx],
@@ -43,13 +70,15 @@ for user_id in users:
 
         movie_id = movie_idx_to_id[movie_idx]
 
-        label = 1 if movie_id in test_user_movies.get(user_id,set()) else 0
+        # label = 1 if movie_id in test_user_movies.get(user_id,set()) else 0
+        if movie_id in positive_movies:
+            continue
 
         samples.append([
             user_idx,
             movie_idx,
             score,
-            label
+            0
         ])
 
 features = pd.DataFrame(
