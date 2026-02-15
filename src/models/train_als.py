@@ -47,7 +47,8 @@ print("ALS training completed.")
 print("Saving model...")
 
 joblib.dump(model,"../../models/als_model.pkl")
-joblib.dump(user_id_map,"../../models/user_id_model.pkl")
-joblib.dump(movie_id_map,"../../models/movie_id_model.pkl")
+joblib.dump(user_id_map,"../../models/user_id_map.pkl")
+joblib.dump(movie_id_map,"../../models/movie_id_map.pkl")
+joblib.dump(sparse_matrix,"../../models/sparse_matrix.pkl")
 
 print("Model saved successfully.")
