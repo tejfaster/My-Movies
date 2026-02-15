@@ -102,7 +102,7 @@ movie-recommendation-advanced/
 Clone repository:
 
 ```
-git clone https://github.com/tejfaster/movie-recommendation-advanced.git
+git clone https://github.com/tejfaster/My-Movies.git
 
 cd movie-recommendation-advanced
 ```
