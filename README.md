@@ -1,103 +1,147 @@
-# Hybrid Movie Recommendation System (Production-Ready)
+# 🎬 Hybrid Movie Recommendation System (Production-Ready)
 
-A production-scale hybrid recommendation system built using **ALS (Matrix Factorization)** and **XGBoost Ranking**, deployed via **FastAPI** and **Streamlit**.
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-Production-green)
+![Streamlit](https://img.shields.io/badge/Streamlit-Frontend-red)
+![XGBoost](https://img.shields.io/badge/XGBoost-Ranking-orange)
+![ALS](https://img.shields.io/badge/ALS-Collaborative_Filtering-purple)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
-This system handles **33M+ user-movie interactions** and provides personalized movie recommendations through a real-time API and web interface.
+A production-scale hybrid recommendation system using **ALS (Matrix Factorization)** and **XGBoost Learning-to-Rank**, deployed via **FastAPI** and **Streamlit**.
 
----
-
-# Overview
-
-Modern recommendation systems use a multi-stage pipeline:
-
-1. Candidate Generation (ALS)
-2. Feature Engineering
-3. Ranking Model (XGBoost)
-4. API Deployment (FastAPI)
-5. Frontend Interface (Streamlit)
-
-This project implements that full pipeline end-to-end.
+Handles **33M+ ratings** and provides real-time personalized recommendations.
 
 ---
 
-# Features
+# 🚀 Live System Architecture
 
-* ALS collaborative filtering model
-* XGBoost learning-to-rank model
-* Hybrid recommendation system
-* FastAPI production inference API
-* Streamlit interactive frontend
-* Time-aware train/test split
-* Precision@10 evaluation
-* Modular production architecture
+```
+            User
+             │
+             ▼
+      Streamlit Frontend
+             │
+             ▼
+        FastAPI Backend
+             │
+             ▼
+  Hybrid Recommendation Engine
+       │              │
+       ▼              ▼
+   ALS Model     XGBoost Ranker
+       │              │
+       └──────► Final Recommendations
+```
 
 ---
 
-# Dataset
+# 📊 Dataset
 
-Dataset: MovieLens Latest Dataset
+MovieLens Latest Dataset
 
 * 33,832,162 ratings
 * 330,975 users
 * 83,239 movies
-* Time range: 1995–2023
+* Time span: 1995–2023
+* Sparsity: 99.88%
 
 ---
 
-# Model Architecture
+# 🧠 Machine Learning Pipeline
 
-Pipeline:
+## Stage 1 — Candidate Generation (ALS)
 
-User → ALS → Candidate Movies → Feature Engineering → XGBoost Ranker → Final Recommendations
+Matrix factorization learns latent embeddings:
 
-ALS learns latent embeddings.
+```
+User Embedding Vector
+Movie Embedding Vector
+```
 
-XGBoost ranks candidates based on learned features.
+Used to generate candidate movies.
 
 ---
 
-# Evaluation
+## Stage 2 — Feature Engineering
+
+Features include:
+
+* ALS score
+* Embedding similarity
+* User-movie interaction signals
+
+---
+
+## Stage 3 — Ranking Model (XGBoost)
+
+XGBoost predicts probability:
+
+```
+P(user likes movie)
+```
+
+Used to rank candidate recommendations.
+
+---
+
+## Stage 4 — Hybrid Recommendation
+
+Final pipeline:
+
+```
+ALS → Candidate Movies
+      ↓
+Feature Engineering
+      ↓
+XGBoost Ranking
+      ↓
+Final Recommendations
+```
+
+---
+
+# 📈 Evaluation
 
 Metric: Precision@10
 
 Result:
 
+```
 Precision@10 = 0.2044
+```
 
-This is considered excellent performance for candidate generation systems.
+This is considered excellent performance for recommendation systems.
 
 ---
 
-# Project Structure
+# 🏗️ Project Structure
 
 ```
 movie-recommendation-advanced/
 │
-├── api/                 # FastAPI backend
+├── api/
 │   ├── main.py
 │   ├── routes/
 │   └── services/
 │
-├── app/                 # Streamlit frontend
+├── app/
 │   └── streamlit_app.py
 │
-├── src/                 # Training and feature code
+├── src/
 │   ├── models/
 │   ├── features/
 │   ├── evaluation/
 │   └── inference/
 │
-├── models/              # Saved ML models
-│
-├── data/                # Dataset
-│
+├── models/
+├── data/
 ├── requirements.txt
 └── README.md
 ```
 
 ---
 
-# Installation
+# ⚙️ Installation
 
 Clone repository:
 
@@ -123,19 +167,13 @@ pip install -r requirements.txt
 
 ---
 
-# Run FastAPI Backend
+# ▶️ Run Backend API
 
 ```
 uvicorn api.main:app --reload
 ```
 
-API runs at:
-
-```
-http://127.0.0.1:8000
-```
-
-Example endpoint:
+API endpoint:
 
 ```
 http://127.0.0.1:8000/recommend/149954
@@ -143,9 +181,7 @@ http://127.0.0.1:8000/recommend/149954
 
 ---
 
-# Run Streamlit Frontend
-
-In a separate terminal:
+# ▶️ Run Frontend UI
 
 ```
 streamlit run app/streamlit_app.py
@@ -159,14 +195,12 @@ http://localhost:8501
 
 ---
 
-# API Endpoints
+# 📡 API Example
 
-GET /recommend/{user_id}
-
-Example:
+Request:
 
 ```
-/recommend/149954?n=10
+GET /recommend/149954?n=10
 ```
 
 Response:
@@ -175,14 +209,17 @@ Response:
 {
   "user_id": 149954,
   "recommendations": [
-    {"movie": "Jurassic Park", "score": 0.91}
+    {
+      "movie": "Jurassic Park (1993)",
+      "score": 0.91
+    }
   ]
 }
 ```
 
 ---
 
-# Technologies Used
+# 🛠️ Technologies Used
 
 Machine Learning:
 
@@ -207,26 +244,37 @@ Data Processing:
 
 ---
 
-# Key ML Concepts Implemented
+# 💡 Key ML Concepts Demonstrated
 
+* Collaborative Filtering
 * Matrix Factorization
 * Embedding Learning
 * Learning-to-Rank
 * Hybrid Recommendation Systems
-* Production Model Deployment
+* Production ML Deployment
 
 ---
 
-# Future Improvements
+# 🎯 Production Features
 
-* Cloud deployment (AWS, Render, Railway)
-* Real-time user interaction tracking
-* Cold-start recommendation handling
+* Modular architecture
+* Real-time inference API
+* Interactive frontend
+* Scalable ML pipeline
+* Deployment-ready code
+
+---
+
+# 🔮 Future Improvements
+
+* Cloud deployment (AWS / Render)
+* Real-time user feedback integration
 * Neural recommendation models
+* Cold-start handling
 
 ---
 
-# Author
+# 👨‍💻 Author
 
 Tej Pratap
 
@@ -234,6 +282,6 @@ Machine Learning Engineer Project
 
 ---
 
-# License
+# 📜 License
 
 MIT License
