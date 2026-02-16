@@ -82,19 +82,19 @@ Risk: Low
                       ▼
               Feature Engineering Layer
       ┌────────────────────────────────────┐
-      │ User Features                     │
-      │ Movie Features                    │
-      │ Actor Features                    │
-      │ Genre Features                    │
+      │ User Features                      │
+      │ Movie Features                     │
+      │ Actor Features                     │
+      │ Genre Features                     │
       └────────────────────────────────────┘
                       │
                       ▼
                   Model Layer
       ┌────────────────────────────────────┐
-      │ ALS Recommendation Model          │
-      │ XGBoost Ranking Model             │
-      │ Revenue Prediction Model          │
-      │ Actor Profitability Model         │
+      │ ALS Recommendation Model           │
+      │ XGBoost Ranking Model              │
+      │ Revenue Prediction Model           │
+      │ Actor Profitability Model          │
       └────────────────────────────────────┘
                       │
                       ▼
