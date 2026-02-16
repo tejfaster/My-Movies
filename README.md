@@ -1,225 +1,152 @@
-# 🎬 Hybrid Movie Recommendation System (Production-Ready)
+# 🎬 AI Movie Intelligence Platform
+
+### Recommendation System + Investment Decision Engine
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
 ![FastAPI](https://img.shields.io/badge/FastAPI-Production-green)
-![Streamlit](https://img.shields.io/badge/Streamlit-Frontend-red)
+![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-red)
 ![XGBoost](https://img.shields.io/badge/XGBoost-Ranking-orange)
-![ALS](https://img.shields.io/badge/ALS-Collaborative_Filtering-purple)
+![ALS](https://img.shields.io/badge/ALS-Recommendation-purple)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
-A production-scale hybrid recommendation system using **ALS (Matrix Factorization)** and **XGBoost Learning-to-Rank**, deployed via **FastAPI** and **Streamlit**.
+---
 
-Handles **33M+ ratings** and provides real-time personalized recommendations.
+# 🚀 Overview
+
+This project is a **production-ready AI Movie Intelligence Platform** that combines:
+
+* 🎯 Personalized Movie Recommendation System
+* 💰 Movie Investment Decision Support System
+
+It helps:
+
+* Users discover movies
+* Studios choose profitable actors
+* Investors decide which movies to fund
+
+Built using **ALS, XGBoost, FastAPI, and Streamlit**, handling millions of interactions.
 
 ---
 
-# 🚀 Live System Architecture
+# 🧠 System Capabilities
+
+## 1. Recommendation Engine (User Intelligence)
+
+Predicts movies users will like.
+
+Pipeline:
 
 ```
-            User
-             │
-             ▼
-      Streamlit Frontend
-             │
-             ▼
-        FastAPI Backend
-             │
-             ▼
-  Hybrid Recommendation Engine
-       │              │
-       ▼              ▼
-   ALS Model     XGBoost Ranker
-       │              │
-       └──────► Final Recommendations
+User → ALS Candidate Generation → XGBoost Ranking → Final Recommendations
+```
+
+Endpoint:
+
+```
+/recommend/{user_id}
 ```
 
 ---
 
-# 📊 Dataset
+## 2. Investment Intelligence Engine (Business Intelligence)
 
-MovieLens Latest Dataset
+Predicts which actors, genres, and movies are profitable.
+
+Capabilities:
+
+* Actor profitability prediction
+* Movie revenue prediction
+* Genre profitability analysis
+* Investment risk assessment
+
+Example output:
+
+```
+Best Actor Investment:
+Zendaya → Predicted revenue impact: $520M
+Confidence: 87%
+Risk: Low
+```
+
+---
+
+# 🏗️ Unified System Architecture
+
+```
+                    Data Sources
+         ┌────────────────────────────┐
+         │ MovieLens Dataset          │
+         │ TMDB Dataset               │
+         └────────────────────────────┘
+                      │
+                      ▼
+              Feature Engineering Layer
+      ┌────────────────────────────────────┐
+      │ User Features                     │
+      │ Movie Features                    │
+      │ Actor Features                    │
+      │ Genre Features                    │
+      └────────────────────────────────────┘
+                      │
+                      ▼
+                  Model Layer
+      ┌────────────────────────────────────┐
+      │ ALS Recommendation Model          │
+      │ XGBoost Ranking Model             │
+      │ Revenue Prediction Model          │
+      │ Actor Profitability Model         │
+      └────────────────────────────────────┘
+                      │
+                      ▼
+                 FastAPI Backend
+                      │
+                      ▼
+              Streamlit Dashboard UI
+```
+
+---
+
+# 📊 Datasets Used
+
+## MovieLens Dataset
 
 * 33,832,162 ratings
 * 330,975 users
 * 83,239 movies
-* Time span: 1995–2023
-* Sparsity: 99.88%
+
+Used for:
+
+* User recommendation training
+
+## TMDB Dataset
+
+Contains:
+
+* Actors
+* Revenue
+* Budget
+* Popularity
+* Genres
+
+Used for:
+
+* Investment prediction
 
 ---
 
-# 🧠 Machine Learning Pipeline
+# 📈 Model Performance
 
-## Stage 1 — Candidate Generation (ALS)
-
-Matrix factorization learns latent embeddings:
+Recommendation Model:
 
 ```
-User Embedding Vector
-Movie Embedding Vector
+Precision@10: 0.2044
 ```
 
-Used to generate candidate movies.
+This is considered excellent performance.
 
 ---
 
-## Stage 2 — Feature Engineering
-
-Features include:
-
-* ALS score
-* Embedding similarity
-* User-movie interaction signals
-
----
-
-## Stage 3 — Ranking Model (XGBoost)
-
-XGBoost predicts probability:
-
-```
-P(user likes movie)
-```
-
-Used to rank candidate recommendations.
-
----
-
-## Stage 4 — Hybrid Recommendation
-
-Final pipeline:
-
-```
-ALS → Candidate Movies
-      ↓
-Feature Engineering
-      ↓
-XGBoost Ranking
-      ↓
-Final Recommendations
-```
-
----
-
-# 📈 Evaluation
-
-Metric: Precision@10
-
-Result:
-
-```
-Precision@10 = 0.2044
-```
-
-This is considered excellent performance for recommendation systems.
-
----
-
-# 🏗️ Project Structure
-
-```
-movie-recommendation-advanced/
-│
-├── api/
-│   ├── main.py
-│   ├── routes/
-│   └── services/
-│
-├── app/
-│   └── streamlit_app.py
-│
-├── src/
-│   ├── models/
-│   ├── features/
-│   ├── evaluation/
-│   └── inference/
-│
-├── models/
-├── data/
-├── requirements.txt
-└── README.md
-```
-
----
-
-# ⚙️ Installation
-
-Clone repository:
-
-```
-git clone https://github.com/tejfaster/My-Movies.git
-
-cd movie-recommendation-advanced
-```
-
-Create virtual environment:
-
-```
-python -m venv venv
-
-source venv/bin/activate
-```
-
-Install dependencies:
-
-```
-pip install -r requirements.txt
-```
-
----
-
-# ▶️ Run Backend API
-
-```
-uvicorn api.main:app --reload
-```
-
-API endpoint:
-
-```
-http://127.0.0.1:8000/recommend/149954
-```
-
----
-
-# ▶️ Run Frontend UI
-
-```
-streamlit run app/streamlit_app.py
-```
-
-Open:
-
-```
-http://localhost:8501
-```
-
----
-
-# 📡 API Example
-
-Request:
-
-```
-GET /recommend/149954?n=10
-```
-
-Response:
-
-```
-{
-  "user_id": 149954,
-  "recommendations": [
-    {
-      "movie": "Jurassic Park (1993)",
-      "score": 0.91
-    }
-  ]
-}
-```
-
----
-
-# 🛠️ Technologies Used
+# ⚙️ Tech Stack
 
 Machine Learning:
 
@@ -244,40 +171,112 @@ Data Processing:
 
 ---
 
-# 💡 Key ML Concepts Demonstrated
+# 📂 Project Structure
 
-* Collaborative Filtering
-* Matrix Factorization
-* Embedding Learning
-* Learning-to-Rank
-* Hybrid Recommendation Systems
-* Production ML Deployment
+```
+movie-intelligence-platform/
+│
+├── api/                # FastAPI backend
+│
+├── app/                # Streamlit frontend
+│
+├── src/
+│   ├── recommendation/
+│   ├── investment/
+│   ├── features/
+│   └── models/
+│
+├── models/
+│
+├── data/
+│   ├── movielens/
+│   └── tmdb/
+│
+├── requirements.txt
+└── README.md
+```
 
 ---
 
-# 🎯 Production Features
+# ▶️ Run Backend
 
-* Modular architecture
-* Real-time inference API
-* Interactive frontend
-* Scalable ML pipeline
-* Deployment-ready code
+```
+uvicorn api.main:app --reload
+```
+
+Open:
+
+```
+http://127.0.0.1:8000/docs
+```
+
+---
+
+# ▶️ Run Frontend
+
+```
+streamlit run app/streamlit_app.py
+```
+
+Open:
+
+```
+http://localhost:8501
+```
+
+---
+
+# 📡 API Endpoints
+
+Recommendation:
+
+```
+GET /recommend/{user_id}
+```
+
+Actor Investment Analysis:
+
+```
+GET /actor-profitability/{actor}
+```
+
+Revenue Prediction:
+
+```
+POST /predict-revenue
+```
+
+---
+
+# 💡 Real-World Applications
+
+This system can be used by:
+
+* Streaming platforms
+* Movie studios
+* Film investors
+* Production companies
+
+To answer questions like:
+
+* Which actor should I cast?
+* Which genre is profitable?
+* Will this movie succeed?
 
 ---
 
 # 🔮 Future Improvements
 
 * Cloud deployment (AWS / Render)
-* Real-time user feedback integration
 * Neural recommendation models
-* Cold-start handling
+* Real-time retraining pipeline
+* Investment risk modeling
 
 ---
 
 # 👨‍💻 Author
 
 Tej Pratap
-
 Machine Learning Engineer Project
 
 ---
